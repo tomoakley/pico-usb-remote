@@ -10,6 +10,7 @@ relay.off()
 relay_state = False  # Track current state
 last_voltage = 3.3
 button_pressed = False
+active_side = 'left'
 
 poll = select.poll()
 poll.register(sys.stdin, select.POLLIN)
@@ -18,7 +19,11 @@ def trigger_switch():
     relay.on()
     time.sleep(0.5)
     relay.off()
-    print("SWITCHED")
+    if (active_side == 'left'):
+        active_side = 'right'
+    else:
+        active_side == 'left'
+    print(f"{switched: true, active_side: {active_side}}")
 
 while True:
     if button.value() == 0:
